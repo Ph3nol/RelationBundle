@@ -24,6 +24,25 @@ class Configuration implements ConfigurationInterface
 
         $treeBuilder
             ->root('sly_relation')
+                ->addDefaultsIfNotSet()
+                ->children()
+                    ->arrayNode('relations')
+                        ->useAttributeAsKey('id')
+                        ->prototype('array')
+                            ->children()
+                                ->scalarNode('entity1')
+                                    ->cannotBeEmpty()
+                                ->end()
+                                ->scalarNode('entity2')
+                                    ->cannotBeEmpty()
+                                ->end()
+                                ->scalarNode('bidirectional')
+                                    ->defaultFalse()
+                                ->end()
+                            ->end()
+                        ->end()
+                    ->end()
+                ->end()
             ->end();
 
         return $treeBuilder;

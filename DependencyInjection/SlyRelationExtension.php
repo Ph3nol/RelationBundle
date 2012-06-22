@@ -6,7 +6,6 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader;
-use Sly\RelationBundle\Model\EntityCollection;
 
 /**
  * This is the class that loads and manages your bundle configuration.
@@ -25,7 +24,7 @@ class SlyRelationExtension extends Extension
         $config = $this->processConfiguration($configuration, $configs);
 
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-        // $loader->load('manager.xml');
+        $loader->load('manager.xml');
 
         $configuration = $configs[0];
 
