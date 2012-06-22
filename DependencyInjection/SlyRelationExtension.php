@@ -28,6 +28,11 @@ class SlyRelationExtension extends Extension
 
         $configuration = $configs[0];
 
+        echo '<pre>';
+        print_r($configuration);
+        echo '</pre>';
+        exit();
+
         /* --- Configuration management and overloads --- */
 
         $container->setParameter('sly_relation.config', $configuration);

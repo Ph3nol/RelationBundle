@@ -2,7 +2,7 @@
     "name": "sly/relation-bundle",
     "type": "symfony-bundle",
     "description": "Symfony2 bundle to manage relations between models/entities (like friends, contacts and others).",
-    "keywords": ["relation", "entities"],
+    "keywords": ["relations", "entities", "models", "friends", "contacts"],
     "homepage": "https://github.com/Ph3nol/RelationBundle",
     "license": "MIT",
     "authors": [{
