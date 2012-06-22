@@ -24,6 +24,13 @@ class Configuration implements ConfigurationInterface
 
         $treeBuilder
             ->root('sly_relation')
+                ->arrayNode('processes')
+                    ->useAttributeAsKey('id')
+                    ->prototype('array')
+                        ->children()
+                        ->end()
+                    ->end()
+                ->end()
             ->end();
 
         return $treeBuilder;
