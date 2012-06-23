@@ -11,41 +11,85 @@ use Sly\RelationBundle\Model\RelationInterface;
  */
 class Relation implements RelationInterface
 {
-    protected $entity1;
-    protected $entity2;
+    protected $id;
+    protected $object1Entity;
+    protected $object1Id;
+    protected $object2Entity;
+    protected $object2Id;
     protected $bidirectional;
+    protected $createdAt;
 
     /**
      * {@inheritdoc}
      */
-    public function setEntity1($entity)
+    public function getId()
     {
-        $this->entity1 = $entity;
+        return $this->id;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getEntity1()
+    public function setObject1Entity($entity)
     {
-        return $this->entity1;
+        $this->object1Entity = $entity;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setEntity2($entity)
+    public function getObject1Entity()
     {
-        $this->entity2 = $entity;
+        return $this->object1Entity;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getEntity2()
+    public function setObject1Id($id)
     {
-        return $this->entity2();
+        $this->object1Id = $id;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getObject1Id()
+    {
+        return $this->object1Id;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setObject2Entity($entity)
+    {
+        $this->object2Entity = $entity;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getObject2Entity()
+    {
+        return $this->object2Entity();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setObject2Id($id)
+    {
+        $this->object2Id = $id;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getObject2Id()
+    {
+        return $this->object2Id();
+	}
 
     /**
      * {@inheritdoc}
@@ -65,11 +109,27 @@ class Relation implements RelationInterface
 
     /**
      * {@inheritdoc}
+	 */
+    public function setCreatedAt(\DateTime $createdAt)
+    {
+        $this->createdAt = $createdAt;
+    }
+
+    /**
+     * {@inheritdoc}
+	 */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * {@inheritdoc}
      */
     public function setData(array $data)
     {
-        $this->setEntity1($data['entity1']);
-        $this->setEntity2($data['entity2']);
+        $this->setObject1Entity($data['entity1']);
+        $this->setObject2Entity($data['entity2']);
         $this->setBidirectional(isset($data['bidirectional']) ? (bool) $data['bidirectional'] : false);
     }
 }

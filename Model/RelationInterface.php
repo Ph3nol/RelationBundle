@@ -10,32 +10,67 @@ namespace Sly\RelationBundle\Model;
 interface RelationInterface
 {
     /**
-     * Set entity1 value.
+     * Get ID.
      *
-     * @param string $entity Set entity value
+     * @return integer
      */
-    public function setEntity1($entity);
+    public function getId();
 
     /**
-     * Get entity1 value.
+     * Set entity object1 value.
+     *
+     * @param string $entity Set entity object value
+     */
+    public function setObject1Entity($entity);
+
+    /**
+     * Get entity object1 value.
      *
      * @return string
      */
-    public function getEntity1();
+    public function getObject1Entity();
 
     /**
-     * Set entity2 value.
+     * Set entity object1 ID.
      *
-     * @param string $entity Set entity value
+     * @param integer $id Set entity object ID
      */
-    public function setEntity2($entity);
+    public function setObject1Id($id);
 
     /**
-     * Get entity2 value.
+     * Get entity object1 ID.
+     *
+     * @return integer
+     */
+    public function getObject1Id();
+
+    /**
+     * Set entity object2 value.
+     *
+     * @param string $entity Set entity object value
+     */
+    public function setObject2Entity($entity);
+
+    /**
+     * Get entity object2 value.
      *
      * @return string
      */
-    public function getEntity2();
+    public function getObject2Entity();
+
+    /**
+     * Set entity object2 ID.
+     *
+     * @param integer $id Set entity object ID
+     */
+    public function setObject2Id($id);
+
+    /**
+     * Get entity object2 ID.
+     *
+     * @return integer
+     */
+    public function getObject2Id();
 
     /**
      * Set if relation is bidirectional or not.
@@ -50,6 +85,21 @@ interface RelationInterface
      * @return bool
      */
     public function isBidirectional();
+
+    /**
+	 * Set createdAt value.
+	 *
+     * @param \DateTime $createdAt CreatedAt value
+	 */
+    public function setCreatedAt(\DateTime $createdAt);
+
+    /**
+	 * Get createdAt value.
+	 *
+	 * @return \DateTime
+	 *
+	 */
+    public function getCreatedAt();
 
     /**
      * Set data from configuration one.
