@@ -19,7 +19,7 @@ interface RelationInterface
     /**
      * Set name value.
      *
-     * @oaram string $name Name
+     * @param string $name Name
      */
     public function setName($name);
 

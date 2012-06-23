@@ -25,7 +25,7 @@ class Relation extends BaseRelation
             $this->name = $name;
         }
     }
-    
+
     /**
      * __toString.
      *
