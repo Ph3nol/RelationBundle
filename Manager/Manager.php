@@ -2,6 +2,8 @@
 
 namespace Sly\RelationBundle\Manager;
 
+use Sly\RelationBundle\Config\ConfigManager;
+
 /**
  * Manager.
  *
@@ -9,4 +11,15 @@ namespace Sly\RelationBundle\Manager;
  */
 class Manager
 {
+    protected $config;
+
+    /**
+     * Constructor.
+     *
+     * @param ConfigManager $config ConfigManager service
+     */
+    public function __construct(ConfigManager $config)
+    {
+        $this->config = $config;
+    }
 }

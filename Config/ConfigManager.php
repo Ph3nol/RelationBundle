@@ -6,11 +6,11 @@ use Sly\RelationBundle\Model\Relation;
 use Sly\RelationBundle\Model\RelationCollection;
 
 /**
- * Config.
+ * ConfigManager.
  *
  * @author Cédric Dugat <ph3@slynett.com>
  */
-class Config
+class ConfigManager
 {
     protected $config;
     protected $relations;
