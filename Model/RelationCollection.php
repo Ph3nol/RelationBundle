@@ -49,7 +49,7 @@ class RelationCollection implements \IteratorAggregate
      */
     public function get($name)
     {
-        return $this->coll[$name];
+        return isset($this->coll[$name]) ? $this->coll[$name] : null;
     }
 
     /**

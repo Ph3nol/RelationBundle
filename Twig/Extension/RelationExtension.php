@@ -52,7 +52,7 @@ class RelationExtension extends \Twig_Extension
      *
      * @return boolean
      */
-    public function relationExists($object1, $object2, $relationName = null)
+    public function relationExists($object1, $object2, $relationName)
     {
         $this->manager->relationShip($relationName, $object1, $object2);
 

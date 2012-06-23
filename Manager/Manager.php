@@ -52,6 +52,10 @@ class Manager
      */
     public function exists()
     {
+        if (null === $this->config->getRelations()->get($this->relationShip[0])) {
+            throw new \InvalidArgumentException(sprintf('There is no \'%s\' relation in your configuration', $this->relationShip[0]));
+        }
+
         return (bool) $this->relationManager->getRelation($this->relationShip);
     }
 
