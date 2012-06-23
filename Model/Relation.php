@@ -89,7 +89,7 @@ class Relation implements RelationInterface
     public function getObject2Id()
     {
         return $this->object2Id();
-	}
+    }
 
     /**
      * {@inheritdoc}
