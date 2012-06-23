@@ -25,6 +25,7 @@ class SlyRelationExtension extends Extension
 
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('config.xml');
+        $loader->load('orm.xml');
         $loader->load('manager.xml');
 
         $configuration = $configs[0];

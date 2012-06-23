@@ -10,6 +10,7 @@
 
     <services>
         <service id="sly_relation" class="%sly_relation.manager.class%">
+            <argument type="service" id="sly_relation.relation_manager" />
             <argument type="service" id="sly_relation.config_manager" />
         </service>
     </services>
