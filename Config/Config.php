@@ -41,7 +41,7 @@ class Config
      *
      * @return RelationCollection
      */
-    protected function __initAndGetRelations()
+    private function __initAndGetRelations()
     {
         $relations = new RelationCollection();
 
