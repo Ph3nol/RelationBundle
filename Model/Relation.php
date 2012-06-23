@@ -12,6 +12,7 @@ use Sly\RelationBundle\Model\RelationInterface;
 class Relation implements RelationInterface
 {
     protected $id;
+    protected $name;
     protected $object1Entity;
     protected $object1Id;
     protected $object2Entity;
@@ -25,6 +26,22 @@ class Relation implements RelationInterface
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setName($name)
+    {
+        $this->name;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return $this->name;
     }
 
     /**
@@ -121,15 +138,5 @@ class Relation implements RelationInterface
     public function getCreatedAt()
     {
         return $this->createdAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setData(array $data)
-    {
-        $this->setObject1Entity($data['entity1']);
-        $this->setObject2Entity($data['entity2']);
-        $this->setBidirectional(isset($data['bidirectional']) ? (bool) $data['bidirectional'] : false);
     }
 }

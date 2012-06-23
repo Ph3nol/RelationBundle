@@ -3,6 +3,7 @@
 namespace Sly\RelationBundle\Entity;
 
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityRepository;
 use Sly\RelationBundle\Model\RelationInterface;
 use Sly\RelationBundle\Model\RelationManagerInterface;
 
@@ -32,17 +33,30 @@ class RelationManager implements RelationManagerInterface
     /**
      * {@inheritdoc}
      */
-    public function getRelation($objects)
+    public function addRelation(RelationInterface $relation)
     {
-        list($object1, $object2) = $objects;
+        $this->em->persist($relation);
+        $this->em->flush();
+
+        return $relation;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getRelation($relationShip)
+    {
+        list($name, $object1, $object2) = $relationShip;
 
         $q = $this->__getRepository()
             ->createQueryBuilder('r')
-            ->where('r.object1Entity = :object1Entity')
+            ->where('r.name = :name')
+            ->andWhere('r.object1Entity = :object1Entity')
             ->andWhere('r.object2Entity = :object2Entity')
             ->andWhere('r.object1Id = :object1Id')
             ->andWhere('r.object2Id = :object2Id')
             ->setParameters(array(
+                'name'          => $name,
                 'object1Entity' => get_class($object1),
                 'object2Entity' => get_class($object2),
                 'object1Id'     => $object1->getId(),
@@ -52,6 +66,11 @@ class RelationManager implements RelationManagerInterface
         return $q->getQuery()->getOneOrNullResult();
     }
 
+    /**
+     * Get entity repository.
+     * 
+     * @return EntityRepository
+     */
     private function __getRepository()
     {
         return $this->em->getRepository($this->repository);

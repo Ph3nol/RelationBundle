@@ -2,7 +2,7 @@
 
 namespace Sly\RelationBundle\Config;
 
-use Sly\RelationBundle\Model\Relation;
+use Sly\RelationBundle\Entity\Relation;
 use Sly\RelationBundle\Model\RelationCollection;
 
 /**
@@ -46,8 +46,10 @@ class ConfigManager
         $relations = new RelationCollection();
 
         foreach ($this->config['relations'] as $name => $data) {
-            $relation = new Relation();
-            $relation->setData($data);
+            $relation = new Relation($name);
+            $relation->setObject1Entity($data['entity1']);
+            $relation->setObject2Entity($data['entity2']);
+            $relation->setBidirectional(isset($data['bidirectional']) ? (bool) $data['bidirectional'] : false);
 
             $relations->set($name, $relation);
         }

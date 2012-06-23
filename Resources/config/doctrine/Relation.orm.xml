@@ -8,10 +8,12 @@
             <generator strategy="AUTO" />
         </id>
 
-        <field name="object1Entity" column="object1_entity" type="string" length="255" nullable="true" />
-        <field name="object1Id" column="object1_id" type="integer" length="11" nullable="true" />
-        <field name="object2Entity" column="object2_entity" type="string" length="255" nullable="true" />
-        <field name="object2Id" column="object2_id" type="integer" length="11" nullable="true" />
+        <field name="name" column="name" type="string" length="50" nullable="true" />
+
+        <field name="object1Entity" column="object1_entity" type="string" length="255" />
+        <field name="object1Id" column="object1_id" type="integer" length="11" />
+        <field name="object2Entity" column="object2_entity" type="string" length="255" />
+        <field name="object2Id" column="object2_id" type="integer" length="11" />
 
         <field name="createdAt" column="created_at" type="datetime" />
     </entity>

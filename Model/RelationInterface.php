@@ -17,9 +17,23 @@ interface RelationInterface
     public function getId();
 
     /**
+     * Set name value.
+     *
+     * @oaram string $name Name
+     */
+    public function setName($name);
+
+    /**
+     * Get name value.
+     *
+     * @return string
+     */
+    public function getName();
+
+    /**
      * Set entity object1 value.
      *
-     * @param string $entity Set entity object value
+     * @param string $entity Object value
      */
     public function setObject1Entity($entity);
 
@@ -33,7 +47,7 @@ interface RelationInterface
     /**
      * Set entity object1 ID.
      *
-     * @param integer $id Set entity object ID
+     * @param integer $id Object ID
      */
     public function setObject1Id($id);
 
@@ -47,7 +61,7 @@ interface RelationInterface
     /**
      * Set entity object2 value.
      *
-     * @param string $entity Set entity object value
+     * @param string $entity Object value
      */
     public function setObject2Entity($entity);
 
@@ -61,7 +75,7 @@ interface RelationInterface
     /**
      * Set entity object2 ID.
      *
-     * @param integer $id Set entity object ID
+     * @param integer $id Object ID
      */
     public function setObject2Id($id);
 
@@ -100,11 +114,4 @@ interface RelationInterface
 	 *
 	 */
     public function getCreatedAt();
-
-    /**
-     * Set data from configuration one.
-     *
-     * @param array $data Configurtion data
-     */
-    public function setData(array $data);
 }

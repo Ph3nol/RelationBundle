@@ -2,6 +2,8 @@
 
 namespace Sly\RelationBundle\Model;
 
+use Sly\RelationBundle\Model\RelationInterface;
+
 /**
  * RelationManager interface.
  *
@@ -12,9 +14,18 @@ interface RelationManagerInterface
     /**
      * Get specific relation between 2 objects.
      * 
-     * @param array $objects The 2 objects
+     * @param array $relationShip Relationship (name, object1, object2)
      * 
      * @return RelationInterface|null
      */
-    public function getRelation($objects);
+    public function getRelation($relationShip);
+
+    /**
+     * Add a new relation.
+     * 
+     * @param RelationInterface $relation Relation
+     * 
+     * @return RelationInterface
+     */
+    public function addRelation(RelationInterface $relation);
 }
