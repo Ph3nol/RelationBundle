@@ -3,7 +3,7 @@
       xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                     http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <entity name="Sly\RelationBundle\Entity\Relation" table="relation">
+    <entity name="Sly\RelationBundle\Entity\Relation" table="sly_relation">
         <id name="id" type="integer" column="id">
             <generator strategy="AUTO" />
         </id>
