@@ -27,6 +27,7 @@ class SlyRelationExtension extends Extension
         $loader->load('config.xml');
         $loader->load('orm.xml');
         $loader->load('manager.xml');
+        $loader->load('twig.xml');
 
         $configuration = $configs[0];
 

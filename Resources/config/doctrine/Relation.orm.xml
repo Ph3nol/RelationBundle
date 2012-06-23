@@ -18,4 +18,3 @@
         <field name="createdAt" column="created_at" type="datetime" />
     </entity>
 </doctrine-mapping>
-
