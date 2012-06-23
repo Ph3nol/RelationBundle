@@ -14,7 +14,7 @@ class Manager
 {
     protected $relationManager;
     protected $config;
-    protected $entities;
+    protected $objects;
 
     /**
      * Constructor.
@@ -29,23 +29,23 @@ class Manager
     }
 
     /**
-     * Set entities.
+     * Set objects.
      * 
      * @param object $object1 Object1
      * @param object $object2 Object2
      */
     public function setEntities($object1, $object2)
     {
-        $this->entities = array($object1, $object2);
+        $this->objects = array($object1, $object2);
     }
 
     /**
-     * Has an existent relation or not.
+     * Returns if relation exists or not.
      * 
      * @return boolean
      */
     public function exists()
     {
-        return false;
+        return (bool) $this->relationManager->getRelation($this->objects);
     }
 }

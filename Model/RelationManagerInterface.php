@@ -9,4 +9,12 @@ namespace Sly\RelationBundle\Model;
  */
 interface RelationManagerInterface
 {
+    /**
+     * Get specific relation between 2 objects.
+     * 
+     * @param array $objects The 2 objects
+     * 
+     * @return RelationInterface|null
+     */
+    public function getRelation($objects);
 }

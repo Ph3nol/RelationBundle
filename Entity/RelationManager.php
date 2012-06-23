@@ -28,4 +28,32 @@ class RelationManager implements RelationManagerInterface
         $this->em         = $em;
         $this->repository = $repository;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getRelation($objects)
+    {
+        list($object1, $object2) = $objects;
+
+        $q = $this->__getRepository()
+            ->createQueryBuilder('r')
+            ->where('r.object1Entity = :object1Entity')
+            ->andWhere('r.object2Entity = :object2Entity')
+            ->andWhere('r.object1Id = :object1Id')
+            ->andWhere('r.object2Id = :object2Id')
+            ->setParameters(array(
+                'object1Entity' => get_class($object1),
+                'object2Entity' => get_class($object2),
+                'object1Id'     => $object1->getId(),
+                'object2Id'     => $object2->getId(),
+            ));
+
+        return $q->getQuery()->getOneOrNullResult();
+    }
+
+    private function __getRepository()
+    {
+        return $this->em->getRepository($this->repository);
+    }
 }
