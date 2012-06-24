@@ -14,11 +14,11 @@ interface RelationManagerInterface
     /**
      * Get specific relation between 2 objects.
      * 
-     * @param array $relationShip Relationship (name, object1, object2)
+     * @param RelationInterface $relationShip Relationship
      * 
      * @return RelationInterface|null
      */
-    public function getRelation($relationShip);
+    public function getRelation(RelationInterface $relationShip);
 
     /**
      * Add a new relation.
@@ -28,4 +28,23 @@ interface RelationManagerInterface
      * @return RelationInterface
      */
     public function addRelation(RelationInterface $relation);
+
+    /**
+     * Get entity relations query.
+     * 
+     * @param RelationInterface $relationShip Relationship
+     * 
+     * @return \Doctrine\ORM\Query
+     */
+    public function getRelationsQuery(RelationInterface $relationShip);
+
+    /**
+     * Get entity relations.
+     * 
+     * @param RelationInterface $relationShip Relationship
+     * @param integer|null      $limit        Limit
+     * 
+     * @return array
+     */
+    public function getRelations(RelationInterface $relationShip, $limit = null);
 }

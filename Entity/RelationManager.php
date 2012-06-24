@@ -44,7 +44,7 @@ class RelationManager implements RelationManagerInterface
     /**
      * {@inheritdoc}
      */
-    public function getRelation($relationShip)
+    public function getRelation(RelationInterface $relationShip)
     {
         $q = $this->__getRepository()
             ->createQueryBuilder('r')
@@ -69,6 +69,52 @@ class RelationManager implements RelationManagerInterface
             ));
 
         return $q->getQuery()->getOneOrNullResult();
+    }
+
+    /**
+     * Get relations.
+     * Query Builder.
+     * 
+     * @param RelationInterface $relationShip Relation
+     * 
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    private function __getRelationsQB(RelationInterface $relationShip)
+    {
+        $q = $this->__getRepository()
+            ->createQueryBuilder('r')
+            ->where('r.name = :name')
+            ->andWhere('r.object1Entity = :object1Entity')
+            ->andWhere('r.object1Id = :object1Id')
+            ->setParameters(array(
+                'name'          => $relationShip->getName(),
+                'object1Entity' => $relationShip->getObject1Entity(),
+                'object1Id'     => $relationShip->getObject1Id(),
+            ));
+
+        return $q;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getRelationsQuery(RelationInterface $relationShip)
+    {
+        return $this->__getRelationsQB($relationShip)->getQuery();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getRelations(RelationInterface $relationShip, $limit = null)
+    {
+        $q = $this->__getRelationsQB($relationShip);
+
+        if ($limit) {
+            $q->setMaxResults($limit);
+        }
+
+        return $q->getQuery()->getResult();
     }
 
     /**

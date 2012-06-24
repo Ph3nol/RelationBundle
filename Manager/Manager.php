@@ -32,11 +32,11 @@ class Manager
     /**
      * Set relationship.
      * 
-     * @param string $name    Name/Key
-     * @param object $object1 Object1
-     * @param object $object2 Object2
+     * @param string      $name    Name/Key
+     * @param object      $object1 Object1
+     * @param object|null $object2 Object2
      */
-    public function relationShip($name, $object1, $object2)
+    public function relationShip($name, $object1, $object2 = null)
     {
         $this->relationShip = $this->config->getRelations()->get($name);
 
@@ -45,7 +45,10 @@ class Manager
         }
 
         $this->relationShip->setObject1Id($object1->getId());
-        $this->relationShip->setObject2Id($object2->getId());
+
+        if ($object2 && is_object($object2)) {
+            $this->relationShip->setObject2Id($object2->getId());
+        }
     }
 
     /**
@@ -55,6 +58,10 @@ class Manager
      */
     public function exists()
     {
+        if (!$this->relationShip->getObject1Id() || !$this->relationShip->getObject2Id()) {
+            throw new \InvalidArgumentException('A relationship has to got 2 defined entities (IDs)');
+        }
+
         return (bool) $this->relationManager->getRelation($this->relationShip);
     }
 
@@ -70,5 +77,28 @@ class Manager
         }
 
         return $this->relationManager->addRelation($this->relationShip);
+    }
+
+    /**
+     * Get object relations.
+     * 
+     * @param integer|null $limit Limit
+     * 
+     * @return array
+     */
+    public function relations($limit = null)
+    {
+        return $this->relationManager->getRelations($this->relationShip, $limit);
+    }
+
+    /**
+     * Get object relations.
+     * Query only (for paginators and others).
+     * 
+     * @return \Doctrine\ORM\Query
+     */
+    public function relationsQuery()
+    {
+        return $this->relationManager->getRelationsQuery($this->relationShip);
     }
 }
