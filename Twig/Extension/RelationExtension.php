@@ -47,8 +47,8 @@ class RelationExtension extends \Twig_Extension
      * Returns if relation exists or not.
      *
      * @param object $object1      Object1
-     * @param object $object2      Object2
      * @param string $relationName Relation name/key
+     * @param object $object2      Object2
      *
      * @return boolean
      */
