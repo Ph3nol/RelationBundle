@@ -49,6 +49,15 @@ class Manager
         if ($object2 && is_object($object2)) {
             $this->relationShip->setObject2Id($object2->getId());
         }
+
+        /**
+         * @todo Set real objects from their entity name and ID.
+         * ->setObject1Entity($realObject1)
+         * ->setObject2Entity($realObject2)
+         * 
+         * That will allow us to use
+         * $relationManager->relations() loop as relations results.
+         */
     }
 
     /**
