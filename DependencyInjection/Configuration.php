@@ -37,7 +37,7 @@ class Configuration implements ConfigurationInterface
                                     ->cannotBeEmpty()
                                 ->end()
                                 ->scalarNode('bidirectional')
-                                    ->defaultFalse()
+                                    ->defaultTrue()
                                 ->end()
                             ->end()
                         ->end()

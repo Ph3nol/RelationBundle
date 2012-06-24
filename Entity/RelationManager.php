@@ -50,10 +50,17 @@ class RelationManager implements RelationManagerInterface
             ->createQueryBuilder('r')
             ->where('r.name = :name')
             ->andWhere('r.object1Entity = :object1Entity')
-            ->andWhere('r.object2Entity = :object2Entity')
-            ->andWhere('r.object1Id = :object1Id')
-            ->andWhere('r.object2Id = :object2Id')
-            ->setParameters(array(
+            ->andWhere('r.object2Entity = :object2Entity');
+
+        if ($relationShip->isBidirectional()) {
+            $q->andWhere('r.object1Id = :object1Id OR r.object2Id = :object1Id')
+                ->andWhere('r.object2Id = :object2Id OR r.object1Id = :object2Id');
+        } else {
+            $q->andWhere('r.object1Id = :object1Id')
+                ->andWhere('r.object2Id = :object2Id');
+        }
+
+        $q->setParameters(array(
                 'name'          => $relationShip->getName(),
                 'object1Entity' => $relationShip->getObject1Entity(),
                 'object2Entity' => $relationShip->getObject2Entity(),
