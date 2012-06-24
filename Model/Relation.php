@@ -89,7 +89,7 @@ class Relation implements RelationInterface
      */
     public function getObject2Entity()
     {
-        return $this->object2Entity();
+        return $this->object2Entity;
     }
 
     /**
@@ -105,7 +105,7 @@ class Relation implements RelationInterface
      */
     public function getObject2Id()
     {
-        return $this->object2Id();
+        return $this->object2Id;
     }
 
     /**

@@ -38,11 +38,14 @@ class Manager
      */
     public function relationShip($name, $object1, $object2)
     {
-        $this->relationShip = array(
-            $name,
-            $object1,
-            $object2,
-        );
+        $this->relationShip = $this->config->getRelations()->get($name);
+
+        if (null === $this->relationShip) {
+            throw new \InvalidArgumentException(sprintf('There is no "%s" relation in your configuration', $name));
+        }
+
+        $this->relationShip->setObject1Id($object1->getId());
+        $this->relationShip->setObject2Id($object2->getId());
     }
 
     /**
@@ -52,10 +55,6 @@ class Manager
      */
     public function exists()
     {
-        if (null === $this->config->getRelations()->get($this->relationShip[0])) {
-            throw new \InvalidArgumentException(sprintf('There is no \'%s\' relation in your configuration', $this->relationShip[0]));
-        }
-
         return (bool) $this->relationManager->getRelation($this->relationShip);
     }
 
@@ -70,10 +69,6 @@ class Manager
             return ;
         }
 
-        $relation = $this->config->getRelations()->get($this->relationShip[0]);
-        $relation->setObject1Id($this->relationShip[1]->getId());
-        $relation->setObject2Id($this->relationShip[2]->getId());
-
-        return $this->relationManager->addRelation($relation);
+        return $this->relationManager->addRelation($this->relationShip);
     }
 }

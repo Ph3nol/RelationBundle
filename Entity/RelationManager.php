@@ -46,8 +46,6 @@ class RelationManager implements RelationManagerInterface
      */
     public function getRelation($relationShip)
     {
-        list($name, $object1, $object2) = $relationShip;
-
         $q = $this->__getRepository()
             ->createQueryBuilder('r')
             ->where('r.name = :name')
@@ -56,11 +54,11 @@ class RelationManager implements RelationManagerInterface
             ->andWhere('r.object1Id = :object1Id')
             ->andWhere('r.object2Id = :object2Id')
             ->setParameters(array(
-                'name'          => $name,
-                'object1Entity' => get_class($object1),
-                'object2Entity' => get_class($object2),
-                'object1Id'     => $object1->getId(),
-                'object2Id'     => $object2->getId(),
+                'name'          => $relationShip->getName(),
+                'object1Entity' => $relationShip->getObject1Entity(),
+                'object2Entity' => $relationShip->getObject2Entity(),
+                'object1Id'     => $relationShip->getObject1Id(),
+                'object2Id'     => $relationShip->getObject2Id(),
             ));
 
         return $q->getQuery()->getOneOrNullResult();

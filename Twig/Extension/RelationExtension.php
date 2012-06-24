@@ -36,10 +36,10 @@ class RelationExtension extends \Twig_Extension
     /**
      * {@inheritdoc}
      */
-    public function getFunctions()
+    public function getFilters()
     {
         return array(
-            'relation_exists' => new \Twig_Function_Method($this, 'relationExists'),
+            'relation_exists' => new \Twig_Filter_Method($this, 'relationExists'),
         );
     }
 
@@ -52,7 +52,7 @@ class RelationExtension extends \Twig_Extension
      *
      * @return boolean
      */
-    public function relationExists($object1, $object2, $relationName)
+    public function relationExists($object1, $relationName, $object2)
     {
         $this->manager->relationShip($relationName, $object1, $object2);
 
