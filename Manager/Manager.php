@@ -5,7 +5,6 @@ namespace Sly\RelationBundle\Manager;
 use Sly\RelationBundle\Config\ConfigManager;
 use Sly\RelationBundle\Entity\Relation;
 use Sly\RelationBundle\Model\RelationManagerInterface;
-use Sly\RelationBundle\Model\RelationCollection;
 
 /**
  * Manager.
