@@ -62,8 +62,8 @@ class RelationManager implements RelationManagerInterface
 
         $q->setParameters(array(
                 'name'          => $relationShip->getName(),
-                'object1Entity' => $relationShip->getObject1Entity(),
-                'object2Entity' => $relationShip->getObject2Entity(),
+                'object1Entity' => get_class($relationShip->getObject1Entity()),
+                'object2Entity' => get_class($relationShip->getObject2Entity()),
                 'object1Id'     => $relationShip->getObject1Id(),
                 'object2Id'     => $relationShip->getObject2Id(),
             ));
@@ -88,7 +88,7 @@ class RelationManager implements RelationManagerInterface
             ->andWhere('r.object1Id = :object1Id')
             ->setParameters(array(
                 'name'          => $relationShip->getName(),
-                'object1Entity' => $relationShip->getObject1Entity(),
+                'object1Entity' => get_class($relationShip->getObject1Entity()),
                 'object1Id'     => $relationShip->getObject1Id(),
             ));
 
@@ -115,6 +115,14 @@ class RelationManager implements RelationManagerInterface
         }
 
         return $q->getQuery()->getResult();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function buildObject($className, $id)
+    {
+        return $this->em->getRepository($className)->findOneById($id);
     }
 
     /**

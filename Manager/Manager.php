@@ -5,6 +5,7 @@ namespace Sly\RelationBundle\Manager;
 use Sly\RelationBundle\Config\ConfigManager;
 use Sly\RelationBundle\Entity\Relation;
 use Sly\RelationBundle\Model\RelationManagerInterface;
+use Sly\RelationBundle\Model\RelationCollection;
 
 /**
  * Manager.
@@ -44,20 +45,13 @@ class Manager
             throw new \InvalidArgumentException(sprintf('There is no "%s" relation in your configuration', $name));
         }
 
+        $this->relationShip->setObject1Entity($object1);
         $this->relationShip->setObject1Id($object1->getId());
 
         if ($object2 && is_object($object2)) {
+            $this->relationShip->setObject2Entity($object2);
             $this->relationShip->setObject2Id($object2->getId());
         }
-
-        /**
-         * @todo Set real objects from their entity name and ID.
-         * ->setObject1Entity($realObject1)
-         * ->setObject2Entity($realObject2)
-         * 
-         * That will allow us to use
-         * $relationManager->relations() loop as relations results.
-         */
     }
 
     /**
@@ -97,7 +91,21 @@ class Manager
      */
     public function relations($limit = null)
     {
-        return $this->relationManager->getRelations($this->relationShip, $limit);
+        $relationsResults = $this->relationManager->getRelations($this->relationShip, $limit);
+        $mainObject       = $this->relationShip->getObject1Entity();
+        $relatedObjects   = array();
+
+        foreach ($relationsResults as $relation) {
+            if ($relation->getObject1Id() == $mainObject->getId()) {
+                $relatedObject = $this->relationManager->buildObject($relation->getObject2Entity(), $relation->getObject2Id());
+            } else {
+                $relatedObject = $this->relationManager->buildObject($relation->getObject1Entity(), $relation->getObject1Id());
+            }
+
+            $relatedObjects[$relatedObject->getId()] = $relatedObject;
+        }
+
+        return $relatedObjects;
     }
 
     /**
