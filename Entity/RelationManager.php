@@ -85,7 +85,7 @@ class RelationManager implements RelationManagerInterface
             ->createQueryBuilder('r')
             ->where('r.name = :name')
             ->andWhere('r.object1Entity = :object1Entity')
-            ->andWhere('r.object1Id = :object1Id')
+            ->andWhere('r.object1Id = :object1Id OR r.object2Id = :object1Id')
             ->setParameters(array(
                 'name'          => $relationShip->getName(),
                 'object1Entity' => get_class($relationShip->getObject1Entity()),
