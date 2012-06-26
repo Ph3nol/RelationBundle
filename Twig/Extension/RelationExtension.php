@@ -40,6 +40,7 @@ class RelationExtension extends \Twig_Extension
     {
         return array(
             'relation_exists' => new \Twig_Filter_Method($this, 'relationExists'),
+            'relations'       => new \Twig_Filter_Method($this, 'getRelations'),
         );
     }
 
@@ -57,6 +58,21 @@ class RelationExtension extends \Twig_Extension
         $this->manager->relationShip($relationName, $object1, $object2);
 
         return (bool) $this->manager->exists();
+    }
+
+    /**
+     * Get relations.
+     * 
+     * @param object $object1      Object1
+     * @param string $relationName Relation name/key
+     * 
+     * @return array
+     */
+    public function getRelations($object1, $relationName)
+    {
+        $this->manager->relationShip($relationName, $object1);
+
+        return $this->manager->relations();
     }
 
     /**

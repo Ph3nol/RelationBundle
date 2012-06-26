@@ -96,7 +96,11 @@ Then list all `$user` relations.
 
 <h2>Now let's list all {{ user.name }} friends!</h2>
 
-<p>To be continued!</p>
+<ul>
+    {% for friend in user | relations('friendship') %}
+        <li>{{ friend.name }}</li>
+    {% endfor %}
+</ul>
 ```
 
 -----
