@@ -85,12 +85,13 @@ class Manager
      * Get object relations.
      * 
      * @param integer|null $limit Limit
+     * @param string|null  $order Order name
      * 
      * @return array
      */
-    public function relations($limit = null)
+    public function relations($limit = null, $order = null)
     {
-        $relationsResults = $this->relationManager->getRelations($this->relationShip, $limit);
+        $relationsResults = $this->relationManager->getRelations($this->relationShip, $limit, $order);
         $mainObject       = $this->relationShip->getObject1Entity();
         $relatedObjects   = array();
 

@@ -106,12 +106,24 @@ class RelationManager implements RelationManagerInterface
     /**
      * {@inheritdoc}
      */
-    public function getRelations(RelationInterface $relationShip, $limit = null)
+    public function getRelations(RelationInterface $relationShip, $limit = null, $order = null)
     {
         $q = $this->__getRelationsQB($relationShip);
 
         if ($limit) {
             $q->setMaxResults($limit);
+        }
+
+        switch ($order) {
+            default:
+                $q->orderBy('r.id', 'DESC');
+                break;
+
+            case 'rand':
+                /**
+                 * @todo
+                 */
+                break;
         }
 
         return $q->getQuery()->getResult();

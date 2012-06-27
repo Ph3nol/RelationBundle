@@ -63,16 +63,18 @@ class RelationExtension extends \Twig_Extension
     /**
      * Get relations.
      * 
-     * @param object $object1      Object1
-     * @param string $relationName Relation name/key
+     * @param object       $object1      Object1
+     * @param string       $relationName Relation name/key
+     * @param integer|null $limit        Count limit
+     * @param string|null  $order        Order name
      * 
      * @return array
      */
-    public function getRelations($object1, $relationName)
+    public function getRelations($object1, $relationName, $limit = null, $order = null)
     {
         $this->manager->relationShip($relationName, $object1);
 
-        return $this->manager->relations();
+        return $this->manager->relations($limit, $order);
     }
 
     /**

@@ -58,6 +58,24 @@ Now imagine we have a `$user` entity and we want to list other users in relation
     // ...
 ```
 
+To define a count limit, just set an argument to `relations` method.
+
+The second argument concerns order:
+
+* `last` (default) Last created relations
+* `rand`           Random order
+
+Here is an example with listing 10 last relations:
+
+```php
+<?php
+    // ...
+
+    foreach ($relation->relations(10, 'last') as $friend) {
+        // ...
+    }
+```
+
 ## 4. Twig functions and renders
 
 For this example, let's consider we are going to render a `$user` entity profile page.

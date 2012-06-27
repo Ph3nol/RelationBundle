@@ -43,8 +43,9 @@ interface RelationManagerInterface
      * 
      * @param RelationInterface $relationShip Relationship
      * @param integer|null      $limit        Limit
+     * @param string|null       $order        Order name
      * 
      * @return array
      */
-    public function getRelations(RelationInterface $relationShip, $limit = null);
+    public function getRelations(RelationInterface $relationShip, $limit = null, $order = null);
 }
