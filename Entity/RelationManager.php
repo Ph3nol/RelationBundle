@@ -74,9 +74,9 @@ class RelationManager implements RelationManagerInterface
     /**
      * Get relations.
      * Query Builder.
-     * 
+     *
      * @param RelationInterface $relationShip Relation
-     * 
+     *
      * @return \Doctrine\ORM\QueryBuilder
      */
     private function __getRelationsQB(RelationInterface $relationShip)
@@ -86,6 +86,7 @@ class RelationManager implements RelationManagerInterface
             ->where('r.name = :name')
             ->andWhere('r.object1Entity = :object1Entity')
             ->andWhere('r.object1Id = :object1Id OR r.object2Id = :object1Id')
+            ->orderBy('r.createdAt', 'DESC')
             ->setParameters(array(
                 'name'          => $relationShip->getName(),
                 'object1Entity' => get_class($relationShip->getObject1Entity()),
@@ -106,24 +107,12 @@ class RelationManager implements RelationManagerInterface
     /**
      * {@inheritdoc}
      */
-    public function getRelations(RelationInterface $relationShip, $limit = null, $order = null)
+    public function getRelations(RelationInterface $relationShip, $limit = null)
     {
         $q = $this->__getRelationsQB($relationShip);
 
         if ($limit) {
             $q->setMaxResults($limit);
-        }
-
-        switch ($order) {
-            default:
-                $q->orderBy('r.id', 'DESC');
-                break;
-
-            case 'rand':
-                /**
-                 * @todo
-                 */
-                break;
         }
 
         return $q->getQuery()->getResult();
@@ -139,7 +128,7 @@ class RelationManager implements RelationManagerInterface
 
     /**
      * Get entity repository.
-     * 
+     *
      * @return EntityRepository
      */
     private function __getRepository()

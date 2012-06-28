@@ -31,7 +31,7 @@ class Manager
 
     /**
      * Set relationship.
-     * 
+     *
      * @param string      $name    Name/Key
      * @param object      $object1 Object1
      * @param object|null $object2 Object2
@@ -55,7 +55,7 @@ class Manager
 
     /**
      * Returns if relation exists or not.
-     * 
+     *
      * @return boolean
      */
     public function exists()
@@ -69,7 +69,7 @@ class Manager
 
     /**
      * Create relation.
-     * 
+     *
      * @return RelationInterface|null
      */
     public function create()
@@ -83,10 +83,14 @@ class Manager
 
     /**
      * Get object relations.
-     * 
+     *
+     * Order parameter supports:
+     * null: default order, createdAt DESC
+     * rand: random order
+     *
      * @param integer|null $limit Limit
      * @param string|null  $order Order name
-     * 
+     *
      * @return array
      */
     public function relations($limit = null, $order = null)
@@ -105,13 +109,17 @@ class Manager
             $relatedObjects[$relatedObject->getId()] = $relatedObject;
         }
 
+        if ($order == 'rand') {
+            shuffle($relatedObjects);
+        }
+
         return $relatedObjects;
     }
 
     /**
      * Get object relations.
      * Query only (for paginators and others).
-     * 
+     *
      * @return \Doctrine\ORM\Query
      */
     public function relationsQuery()
