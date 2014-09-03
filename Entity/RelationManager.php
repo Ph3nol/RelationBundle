@@ -62,8 +62,8 @@ class RelationManager implements RelationManagerInterface
 
         $q->setParameters(array(
                 'name'          => $relationShip->getName(),
-                'object1Entity' => get_class($relationShip->getObject1Entity()),
-                'object2Entity' => get_class($relationShip->getObject2Entity()),
+                'object1Entity' => $relationShip->getObject1Entity(),
+                'object2Entity' => $relationShip->getObject2Entity(),
                 'object1Id'     => $relationShip->getObject1Id(),
                 'object2Id'     => $relationShip->getObject2Id(),
             ));
