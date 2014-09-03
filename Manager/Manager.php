@@ -44,11 +44,11 @@ class Manager
             throw new \InvalidArgumentException(sprintf('There is no "%s" relation in your configuration', $name));
         }
 
-        $this->relationShip->setObject1Entity($object1);
+        $this->relationShip->setObject1Entity(get_class($object1));
         $this->relationShip->setObject1Id($object1->getId());
 
         if ($object2 && is_object($object2)) {
-            $this->relationShip->setObject2Entity($object2);
+            $this->relationShip->setObject2Entity(get_class($object2));
             $this->relationShip->setObject2Id($object2->getId());
         }
     }
